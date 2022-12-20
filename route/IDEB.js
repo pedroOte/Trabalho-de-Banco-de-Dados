@@ -1,7 +1,7 @@
 const express = require("express");
 const Router = express.Router();
 const mysqlConnection = require("../connection")
-var localidade = [], sem_Registro = [], cadastrados = [];
+var localidade = [], escolas_participantes = [], aprovacao = [], media_SAEB = [], IDEB = [], serie = [], ano = [];
 
 Router.get("/", (req,res)=>[
     mysqlConnection.query("Select * from IDEB", (err, rows, fields)=>{
@@ -20,10 +20,14 @@ Router.get("/", (req,res)=>[
 function formatData(dataArray) {
     for(var i = 0; i < dataArray.length; i++) {
       localidade[i] = dataArray[i].local;
-      sem_Registro[i] = dataArray[i].sem_Reg;
-      cadastrados[i]= dataArray[i].cad;
+      escolas_participantes[i] = dataArray[i].esc_partc;
+      aprovacao[i]= dataArray[i].aprov;
+      media_SAEB[i]= dataArray[i].avg_saeb;
+      IDEB[i]= dataArray[i].ideb;
+      serie[i]= dataArray[i].serie;
+      ano[i]= dataArray[i].ano;
     }
-    jsonArray = [localidade, sem_Registro, cadastrados];
+    jsonArray = [localidade, escolas_participantes, aprovacao, media_SAEB, IDEB, serie, ano];
     // console.log("in FormatData()...\n");
     // console.log(jsonArray);
   }
