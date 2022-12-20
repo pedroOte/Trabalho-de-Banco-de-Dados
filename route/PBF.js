@@ -1,10 +1,10 @@
 const express = require("express");
 const Router = express.Router();
 const mysqlConnection = require("../connection")
-var pessoa = [], age = [];
+var localidade = [], nao_Beneficiados = [], beneficiados = [];
 
 Router.get("/", (req,res)=>[
-    mysqlConnection.query("Select * from people", (err, rows, fields)=>{
+    mysqlConnection.query("Select * from PBF", (err, rows, fields)=>{
         if(!err){
             formatData(rows);
             res.send(jsonArray);
@@ -19,10 +19,11 @@ Router.get("/", (req,res)=>[
 
 function formatData(dataArray) {
     for(var i = 0; i < dataArray.length; i++) {
-      pessoa[i] = dataArray[i].name;
-      age[i] = dataArray[i].age;
+      localidade[i] = dataArray[i].local;
+      nao_Beneficiados[i] = dataArray[i].nao_Ben;
+      beneficiados[i]= dataArray[i].ben;
     }
-    jsonArray = [pessoa, age];
+    jsonArray = [localidade, nao_Beneficiados, beneficiados];
     // console.log("in FormatData()...\n");
     // console.log(jsonArray);
   }

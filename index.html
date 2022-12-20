@@ -1,9 +1,38 @@
-<!DOCTYPE html>
 <html>
-    <head>
-        <title> Trabalho BD </title>
-    </head>
-    <body>
-        
-    </body>
+  <head>
+    <title>Chart-mysql demo</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    
+    <script>
+      // code to draw graph
+
+      $.get("http://localhost:3000/index/PBF", (result) => {
+        var context = document.getElementById('clients').getContext('2d');
+        var clientsChart = new Chart(context, {
+          type: 'line',
+          data: {
+            labels:result[2],
+            datasets: [
+              {
+                label: 'Valor',
+                backgroundColor: 'rgb(151,187,205)',
+                data: result[1]
+              }
+            ]
+          }
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <header></header>
+
+    <div class="graph">
+      <canvas id="clients" width=40% height=30%></canvas>
+    </div>
+    
+  </body>
 </html>
