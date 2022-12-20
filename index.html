@@ -13,12 +13,12 @@
         var clientsChart = new Chart(context, {
           type: 'line',
           data: {
-            labels:result[2],
+            labels:result[1],
             datasets: [
               {
                 label: 'Valor',
                 backgroundColor: 'rgb(151,187,205)',
-                data: result[1]
+                data: result[2]
               }
             ]
           }
@@ -28,7 +28,7 @@
   </head>
 
   <body>
-    <header></header>
+    <header>Ola mundo</header>
 
     <div class="graph">
       <canvas id="clients" width=40% height=30%></canvas>
