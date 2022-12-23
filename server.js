@@ -2,7 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mysqlConnection = require("./connection");
 //const PeopleRoutes = require("./routes/people");
-const pbf = require("./routes/PBF");
+const pbf = require("./routes/cons1");
+const IDEB = require("./routes/cons2");
+const serie = require("./routes/cons4");
+const renda = require("./routes/cons5");
 
 
 
@@ -13,6 +16,9 @@ app.use((req, res, next) => {
     next();
   });
 //app.use("/people", PeopleRoutes);
-app.use("/index", pbf);
+app.use("/index1", pbf);
+app.use("/index2", IDEB);
+app.use("/index4", serie);
+app.use("/index5", renda);
 
 app.listen(3000)

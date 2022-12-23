@@ -7,28 +7,33 @@
     
     <script>
       // code to draw graph
-
-      $.get("http://localhost:3000/index/PBF", (result) => {
+      
+      $.get("http://localhost:3000/index1/cons1", (result) => {
         var context = document.getElementById('clients').getContext('2d');
         var clientsChart = new Chart(context, {
           type: 'line',
           data: {
-            labels:result[1],
-            datasets: [
-              {
-                label: 'Valor',
-                backgroundColor: 'rgb(151,187,205)',
-                data: result[2]
-              }
-            ]
+            labels: result[0],
+            datasets: [{
+              label: 'IDEB',
+              data: result[1],
+              backgroundColor: 'rgb(151,187,05), 0',
+              borderColor: 'rgb(101,137,0)',
+            },{
+              label: 'Bolsa Familia',
+              data: result[2]
+            }],
+            
           }
+          });
         });
-      });
+        
+
     </script>
   </head>
 
   <body>
-    <header>Ola mundo</header>
+    <header></header>
 
     <div class="graph">
       <canvas id="clients" width=40% height=30%></canvas>

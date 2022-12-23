@@ -1,10 +1,10 @@
 const express = require("express");
 const Router = express.Router();
 const mysqlConnection = require("../connection")
-var localidade = [], extrema_pobreza = [], pobreza = [], baixa_renda = [], acima_meio_salario = [];
+var localidade = [], total = [], IDEB = [];
 
-Router.get("/", (req,res)=>[
-    mysqlConnection.query("Select * from renda_familiar", (err, rows, fields)=>{
+Router.get("/cons4", (req,res)=>[
+    mysqlConnection.query("SELECT i.localidade, IDEB, Total FROM ideb as i JOIN rendafamiliar as r ON i.localidade = r.localidade WHERE IDEB =(SELECT min(IDEB) FROM ideb);", (err, rows, fields)=>{
         if(!err){
             formatData(rows);
             res.send(jsonArray);
@@ -19,13 +19,11 @@ Router.get("/", (req,res)=>[
 
 function formatData(dataArray) {
     for(var i = 0; i < dataArray.length; i++) {
-      localidade[i] = dataArray[i].local;
-      extrema_pobreza[i] = dataArray[i].ext_pob;
-      pobreza[i]= dataArray[i].pob;
-      baixa_renda[i]= dataArray[i].baixa_ren;
-      acima_meio_salario[i]= dataArray[i].acima_meio_sal;
+      localidade[i] = dataArray[i].localidade;
+      total[i]= dataArray[i].Total;
+      IDEB[i]= dataArray[i].IDEB;
     }
-    jsonArray = [localidade, extrema_pobreza, pobreza, baixa_renda, acima_meio_salario];
+    jsonArray = [localidade, total, IDEB];
     // console.log("in FormatData()...\n");
     // console.log(jsonArray);
   }

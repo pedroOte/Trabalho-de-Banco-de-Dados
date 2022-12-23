@@ -1,10 +1,10 @@
 const express = require("express");
 const Router = express.Router();
 const mysqlConnection = require("../connection")
-var localidade = [], sem_Registro = [], cadastrados = [];
+var localidade = [], IDEB = [], Serie = [];
 
-Router.get("/", (req,res)=>[
-    mysqlConnection.query("Select * from extrema_pobreza", (err, rows, fields)=>{
+Router.get("/cons2", (req,res)=>[
+    mysqlConnection.query("SELECT localidade, IDEB, Serie FROM ideb WHERE IDEB = (SELECT max(IDEB) FROM ideb WHERE Serie = \"Fundamental I\") AND Serie = \"Fundamental I\" OR IDEB = (SELECT max(IDEB) FROM ideb WHERE Serie = \"Fundamental II\") AND Serie = \"Fundamental II\";", (err, rows, fields)=>{
         if(!err){
             formatData(rows);
             res.send(jsonArray);
@@ -20,8 +20,8 @@ Router.get("/", (req,res)=>[
 function formatData(dataArray) {
     for(var i = 0; i < dataArray.length; i++) {
       localidade[i] = dataArray[i].local;
-      sem_Registro[i] = dataArray[i].sem_Reg;
-      cadastrados[i]= dataArray[i].cad;
+      sem_Registro[i] = dataArray[i].IDEB;
+      serie[i]= dataArray[i].Serie;
     }
     jsonArray = [localidade, sem_Registro, cadastrados];
     // console.log("in FormatData()...\n");
