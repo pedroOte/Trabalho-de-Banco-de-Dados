@@ -8,31 +8,55 @@
     <script>
       // code to draw graph
 
-      $.get("http://localhost:3000/index/cons5", (result) => {
+      $.get("http://localhost:3000/index5/cons5", (result) => {
         var context = document.getElementById('clients').getContext('2d');
         var clientsChart = new Chart(context, {
-          type: 'line',
+          type: 'bar',
           data: {
             labels:result[0],
             datasets: [
               {
-                label: 'Valor',
+                label: 'IDEB',
                 backgroundColor: 'rgb(151,187,205)',
                 data: result[2]
               }
             ]
           }
         });
+        var context = document.getElementById('renda').getContext('2d');
+        var clientsChart2 = new Chart(context, {
+          type: 'bar',
+          data: {
+            labels:result[0],
+            datasets: [
+              {
+                label: 'RENDA',
+                backgroundColor: 'rgb(151,187,205)',
+                data: result[1]
+              }
+            ]
+          },
+          options: {
+                layout: {
+                    padding: 20
+                }
+            }
+        });
       });
+      
     
     </script>
+
   </head>
 
   <body>
     <header></header>
 
     <div class="graph">
-      <canvas id="clients" width=40% height=30%></canvas>
+      <canvas id="clients"></canvas>
+      </div>
+      <div>
+      <canvas id="renda"></canvas>
     </div>
     
   </body>
