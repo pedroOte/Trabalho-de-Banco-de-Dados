@@ -1,9 +1,11 @@
 <html>
   <head>
     <title>Chart-mysql demo</title>
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quattrocento&display=swap" rel="stylesheet">
     
     <script>
       // code to draw graph
@@ -19,8 +21,16 @@
               data: result[1],
               borderColor: '#36A2EB',
               backgroundColor: '#9BD0F5',
-
-            }],
+            },
+            // {
+              
+            //   label: 'Serie',
+            //   data: result[2],
+            //   borderColor: '#36A2EB',
+            //   backgroundColor: '#9BD0F5',
+            // }
+          ],
+            
             
           }
           });
@@ -32,14 +42,31 @@
   </head>
 
   <body>
-    <header></header>
-
-    <div class="graph">
-      <canvas id="clients"></canvas>
+    <header>
+      <div class="caixa">
+          <h1><a href="index.html"><img src="img/logo.png" alt="logo"></a></h1>
+          <nav>
+              <ul>
+                  <li><a href="index.html#Apresentacao">IDEB</a></li>
+                  <li><a href="index.html#Consultas">Consultas</a></li>
+              </ul>
+          </nav>
       </div>
+    </header>
+      
+    <section class="graf">
       <div>
-      <canvas id="renda"></canvas>
-    </div>
+        <div class="grafico">
+        <canvas id="clients"></canvas>
+        </div>
+      </div>
+    </section>
+    <footer>
+        <div class="pe">
+          <p>Trabalho Final - BD I
+          </p>
+        </div>
+    </footer>
     
   </body>
 </html>
