@@ -1,11 +1,10 @@
 const express = require("express");
 const Router = express.Router();
 const mysqlConnection = require("../connection")
-
 var localidade = [], IDEB = [], Aprovacao = [], Series = [];
 
 Router.get("/cons3", (req,res)=>[
-    mysqlConnection.query("SELECT i.localidade, i.Aprovacao as Aprovacao_Fundamental_I, f.Aprovacao as Aprovacao_Fundamental_II, i.IDEB as IDEB_Fundamental_I, f.IDEB as IDEB_Fundamental_II FROM ideb as i JOIN ideb as f on i.Localidade = f.Localidade and i.Serie = \"Fundamental I\" and f.Serie = \"Fundamental II\";", (err, rows, fields)=>{
+    mysqlConnection.query("SELECT i.localidade, i.Aprovacao as Aprovacao_Fundamental_I, f.Aprovacao as Aprovacao_Fundamental_II, i.IDEB as IDEB_Fundamental_I, f.IDEB as IDEB_Fundamental_II, f.Serie FROM ideb as i JOIN ideb as f on i.Localidade = f.Localidade and i.Serie = \"Fundamental I\" and f.Serie = \"Fundamental II\";", (err, rows, fields)=>{
         if(!err){
             formatData(rows);
             res.send(jsonArray);
@@ -28,9 +27,8 @@ function formatData(dataArray) {
       Series[i] = dataArray[i].Serie;
     }
     jsonArray = [localidade, IDEB, Aprovacao, Series];
-    }
-    jsonArray = [localidade, IDEB, Aprovacao];
     // console.log("in FormatData()...\n");
     // console.log(jsonArray);
+  }
 
 module.exports = Router;
