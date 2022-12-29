@@ -45,6 +45,11 @@ nav a:hover{
     transition: all 500ms ease;
   }
 
+h1.tituloC{
+    text-align: center;
+    font-size: 1.1em;
+
+}
 
 .apresentacao{
     display: flex;
