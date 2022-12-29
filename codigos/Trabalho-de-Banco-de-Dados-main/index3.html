@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <title>Chart-mysql demo</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quattrocento&display=swap" rel="stylesheet">
+    
+    <script>
+      // code to draw graph
+      
+      $.get("http://localhost:3000/index3/cons3", (result) => {
+        
+        var label = [];
+        for(var i = 0; i < result[0].length; i++){
+          label.push(result[0][i] + " (" + result[3][i] + ")");
+        }
+
+        var context = document.getElementById('clients').getContext('2d');
+        var clientsChart = new Chart(context, {
+          type: 'bar',
+          data: {
+            labels: label,
+            datasets: [{
+              type: 'line',
+              label: 'IDEB',
+              data: result[1],
+              borderColor: '#36A2EB',
+              
+
+            },{
+              label: 'Aprovação',
+              data: result[2],
+              borderColor: '#FF6384',
+              backgroundColor: '#FFB1C1',
+
+            }],
+            
+          }
+          });
+        });
+        
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <div class="caixa">
+          <h1><a href="index.html"><img src="img/logo.png" alt="logo"></a></h1>
+          <nav>
+              <ul>
+                  <li><a href="index.html#Apresentacao">IDEB</a></li>
+                  <li><a href="index.html#Consultas">Consultas</a></li>
+              </ul>
+          </nav>
+      </div>
+    </header>
+      
+    <section class="graf">
+      <div>
+        <div class="grafico">
+        <canvas id="clients"></canvas>
+        </div>
+      </div>
+    </section>
+    <footer>
+        <div class="pe">
+          <p>Trabalho Final - BD I
+          </p>
+        </div>
+    </footer>
+  </body>
+</html>
